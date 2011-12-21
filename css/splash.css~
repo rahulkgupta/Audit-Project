@@ -1,0 +1,66 @@
+div.header#outline
+{
+    background-color:#61D8A2;
+    position:relative;
+}
+
+#content.header
+{
+    padding:150px 0 42px 0;
+
+}
+
+#tag.header
+{
+    padding:0px 0 48px 0;
+    font-size:70px;
+    font-family:"Open Sans","Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,sans-serif;
+    font-weight:normal;
+}
+
+h3.header
+{
+    padding:0px 0 18px 0;
+}
+
+#sign
+{
+    font-size: 30px;
+    position:relative;
+    top:-8px;
+}
+
+#border.header
+{
+    height:30px;
+    background-color:#00B060;
+}
+
+#audits
+{
+    background-color:#36D88E;
+    height:200px;
+}
+
+#reports
+{
+    background-color:#36D88E;
+    height:200px;
+}
+
+#teams
+{
+    background-color:#36D88E;
+    height:200px;
+}
+
+#info.container
+{
+    padding: 30px 0 30px 0;
+}
+
+#text-info
+{
+    padding: 18px 0 0px 0;
+    font-weight:normal;
+}
