@@ -8,6 +8,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('main.views',
     (r'^$','index'),
+    (r'^signin$','signin'),
+    (r'^dashboard$','dashboard'),
 )
 
 
