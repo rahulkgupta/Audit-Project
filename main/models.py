@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class UserProfile (models.Model):
     user = models.OneToOneField(User)
     title = models.CharField(max_length=30)
-    org = CharField(max_length=20)
+    #org = models.CharField(max_length=20)
     suborg = models.CharField(max_length=20)
 
 class Org (models.Model):
@@ -19,7 +19,7 @@ class Org (models.Model):
     )
 
     org_type = models.CharField(max_length=3, choices=ORG_TYPES)
-    parent = models.ForeignKey(Org)
+    parent = models.ForeignKey('self')
     members = models.ManyToManyField(UserProfile)
 
 #class assocs (Models.model):
