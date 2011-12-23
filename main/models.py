@@ -18,7 +18,7 @@ class Org (Models.model):
         ('DPT', 'Department')
     )
 
-    type = models.CharField(max_length=3, choices=ORG_TYPES)
+    org_type = models.CharField(max_length=3, choices=ORG_TYPES)
     parent = models.ForeignKey(Org)
     members = models.ManyToManyField(UserProfile)
 

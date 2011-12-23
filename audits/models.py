@@ -1,7 +1,8 @@
 from django.db import models
+from main.models import UserProfile
 
 class Audit(Models.model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(UserProfile)
     Audit_name = models.CharField(max_length=200)
     timestamp = models.DateTimeField("Date Created", auto_now_add=True)
     last_mod = models.DateTimeField("Last Modified", auto_now=True)
