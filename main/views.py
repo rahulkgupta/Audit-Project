@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response,redirect
 from django.template import Context, loader, RequestContext
 from django.core.urlresolvers import reverse
+from main.models import UserProfile, Org
 
 
 def index(request):
@@ -13,9 +14,13 @@ def index(request):
 
 def signin(request):
     if request.method == 'POST':
-        user = request.POST.get('user')
-        request.session['user'] = user
-        return HttpResponseRedirect(reverse('main.views.dashboard'))
+        uname = request.POST.get('user')
+        pw = request.POST.get('password')
+        user = blah
+        #user = authenticate(uname, pw)
+        if user is not None:
+            request.session['user'] = uname
+            return HttpResponseRedirect(reverse('main.views.dashboard'))
                                   
 def dashboard(request):
     return render_to_response('main/dashboard.html',
