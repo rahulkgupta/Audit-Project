@@ -10,9 +10,16 @@ urlpatterns = patterns('main.views',
     (r'^$','index'),
     (r'^signin$','signin'),
     (r'^dashboard$','dashboard'),
+    (r'^audits$','audits'),
 )
 
+urlpatterns += patterns('audits.views',
+    (r'^audits/new$','create_audit'),
+)
 
+urlpatterns += patterns('reports.views',
+    (r'^reports/new$','create_report'),
+)
 if settings.DEBUG:
     urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^static/(?P<path>.*)$', 'serve'),

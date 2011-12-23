@@ -18,7 +18,12 @@ def signin(request):
         return HttpResponseRedirect(reverse('main.views.dashboard'))
                                   
 def dashboard(request):
-    print request.session['user']
     return render_to_response('main/dashboard.html',
                               {},
                               context_instance=RequestContext(request))
+
+def audits(request):
+    return render_to_response('main/audits.html',
+                              {},
+                              context_instance=RequestContext(request))
+                              
