@@ -1,7 +1,7 @@
 from django.db import models
 from main.models import UserProfile
 
-class Audit(Models.model):
+class Audit(models.Model):
     user = models.ForeignKey(UserProfile)
     Audit_name = models.CharField(max_length=200)
     timestamp = models.DateTimeField("Date Created", auto_now_add=True)
@@ -17,25 +17,26 @@ class Audit(Models.model):
     lat= = models.FloatField()
     lng = models.FloatField()
 
-class WeightPt(Models.model):
+class WeightPt(models.Model):
     audit = models.ForeignKey(Audit)
     stream_name = models.CharField(max_length=50)
     #bin_id = models.IntegerField()
 
     BIN_CHOICES = (
         ('LF', 'LandFill'),
-        ('BC', 'Bottles and Cans')
-        ('MP', 'Mixed Paper')
-        ('CO', 'Compost')
-        ('BH', 'BioHazard')
-        ('SH', 'Sharps')
-        ('CW', 'Chemical Waste')
-        ('EW', 'E-waste')
-        ('RW', 'Radioactive Waste')
+        ('BC', 'Bottles and Cans'),
+        ('MP', 'Mixed Paper'),
+        ('CO', 'Compost'),
+        ('BH', 'BioHazard'),
+        ('SH', 'Sharps'),
+        ('CW', 'Chemical Waste'),
+        ('EW', 'E-waste'),
+        ('RW', 'Radioactive Waste'),
         ('TW', 'Toxic Waste')
     )
 
     bin_name = models.CharField(max_length=3, choices=BIN_CHOICES)
     weight = models.FloatField()
     bin_percent = models.FloatField()
+
 # Create your models here.
