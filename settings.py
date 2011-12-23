@@ -1,5 +1,5 @@
 # Django settings for tut1 project.
-
+#garble garble 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
