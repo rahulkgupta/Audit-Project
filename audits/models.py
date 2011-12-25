@@ -11,7 +11,6 @@ class Audit(models.Model):
     purpose = models.CharField(max_length=500)
     funder = models.CharField(max_length=50)
     leader_name = models.CharField(max_length=50)
-    #lead_usr_id = models.ForeignKey(UserProfile)
     #suborg = models.CharField(max_length=50)
     Loc_name = models.CharField(max_length=80)
     Loc_type = models.CharField(max_length=25)
