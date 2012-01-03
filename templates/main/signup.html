@@ -13,7 +13,7 @@
 
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}splash.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}signup.css" rel="stylesheet">
 
 
     <!-- Le fav and touch icons -->
@@ -29,52 +29,47 @@
       <div class="fill">
         <div class="container">
           <a class="brand" href="#">Audit.us</a>
-          <ul class="nav">
-          </ul>
-	   <form action="/signin" class="pull-right" method="post">
-	     {% csrf_token %} 
-            <input class="input-small" type="text" name="user" placeholder="Username">
-            <input class="input-small" type="password" name="password" placeholder="Password">
-            <button class="btn" type="submit">Sign in</button>
-          </form>
         </div>
       </div>
     </div>
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-    <div class="header" id="outline">
-      <div class="container">
-	<div class="header" id="content">
-	  <div class="row">
-	    <div class="span11">
-	      <h1 class="header" id="tag">Audits, Made Easy.</h1>
-	    </div>
-	    <div class="span5">
-	      <a href="/signup" class="btn large primary" id="sign" >Sign Up</a>
-	    </div>
-	  </div>
-	</div>
-      </div>
-    </div>
-
-    <div class="header" id="border">
-    </div>
-
-    <div class="body-info">
-      <div class="container" id="info">
+      <div class="container" id="signup">
+	<form action="/sinup" method="post">
 	<div class="row">
-	  <div class="span-one-third" id="audits">
-	    <div>Audits</div>
+	  <div class="span7">
+	    <div>First Name</div>
 	  </div>
-	  <div class="span-one-third" id="reports">
-	    <div>Reports</div>
+	  <div class="span7">
+	    <input class="input" type="text" name="first_name">
 	  </div>
-	  <div class="span-one-third" id="teams">
-	    <div>Teams</div>
+	  <div class="span7">
+	    <div>Last Name</div>
+	  </div>
+	  <div class="span7">
+	    <input class="input" type="text" name="last_name">
+	  </div>
+	  <div class="span7">
+	    <div>Email</div>
+	  </div>
+	  <div class="span7">
+	    <input class="input" type="text" name="email">
+	  </div>
+	  <div class="span7">
+	    <div>Enter Password</div>
+	  </div>
+	  <div class="span7">
+	    <input class="input" type="password" name="password">
+	  </div>
+	  <div class="span7">
+	    <div>Reenter Password</div>
+	  </div>
+	  <div class="span7">
+	    <input class="input" type="password" name="password_check">
 	  </div>
 	</div>
-	<h2 id="text-info">Creating an Audit has never been so easy. Scroll over the above screenshots to learn more.</h2>
-      </div>
+	<button class="btn" type="submit">Sign Up</button>
+      </form>
     </div>
 
     <div class="footer">

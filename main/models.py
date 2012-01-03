@@ -5,7 +5,7 @@ class UserProfile (models.Model):
     user = models.OneToOneField(User)
     title = models.CharField(max_length=30)
     #org = models.CharField(max_length=20)
-    suborg = models.CharField(max_length=20)
+    #suborg = models.CharField(max_length=20)
 
 class Org (models.Model):
     name = models.CharField(max_length=20)

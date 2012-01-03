@@ -11,6 +11,10 @@ def index(request):
                               {},
                               context_instance=RequestContext(request))
 
+def signup(request):
+    return render_to_response('main/signup.html',
+                              {},
+                              context_instance=RequestContext(request))
 
 def signin(request):
     if request.method == 'POST':
