@@ -29,10 +29,9 @@ def signin(request):
     if request.method == 'POST':
         uname = request.POST.get('user')
         pw = request.POST.get('password')
-        #user = blah
         user = authenticate(username=uname, password=pw)
         if user is not None:
-            #request.session['user'] = uname
+            request.session['user'] = uname
             return HttpResponseRedirect(reverse('main.views.dashboard'))
                                   
 def dashboard(request):
@@ -51,11 +50,23 @@ def teams(request):
                               context_instance=RequestContext(request))
 
 def create_org(request):
-    return render_to_response('main/new_team.html',
+    if request.method == 'POST':
+        form = OrgForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            choice = form.cleaned_data['choices']
+            parent = form.cleaned_data['parent_choices']
+            print name,choice, parent
+            return HttpResponseRedirect(reverse('main.views.dashboard'))
+    else:
+        return render_to_response('main/new_team.html',
                               {'form':OrgForm()},
                               context_instance=RequestContext(request))
 
+def join_org(request):
+    return null
 
 class OrgForm (forms.Form):
+    name = forms.CharField(max_length=100)
     choices = forms.ChoiceField(choices=Org.ORG_TYPES)
-
+    parent_choices = forms.ChoiceField(required=False,choices=Org.objects.all())

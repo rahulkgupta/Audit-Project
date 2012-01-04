@@ -14,8 +14,8 @@ urlpatterns = patterns('main.views',
 )
 
 urlpatterns += patterns('main.views',
-    (r'teams/create','create_org'),
-    (r'teams/join','join_org'),
+    (r'^teams/create$','create_org'),
+    (r'^teams/join$','join_org'),
 )
 
 urlpatterns += patterns('audits.views',

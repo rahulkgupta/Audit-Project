@@ -35,14 +35,14 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="container" id="signup">
-	<form action="/new_org" method="post">
+	<form action="" method="post">
 	   {% csrf_token %} 
 	<div class="row">
 	  <div class="span7">
 	    <div>Organization Name</div>
 	  </div>
 	  <div class="span7">
-	    <input class="input" type="text" name="org_name">
+	    {{ form.name }}
 	  </div>
 	  <div class="span7">
 	    <div>Organization Type</div>
@@ -51,22 +51,10 @@
 	    {{ form.choices }}
 	  </div>
 	  <div class="span7">
-	    <div>Email</div>
+	    <div>Parent Organization</div>
 	  </div>
 	  <div class="span7">
-	    <input class="input" type="text" name="email">
-	  </div>
-	  <div class="span7">
-	    <div>Enter Password</div>
-	  </div>
-	  <div class="span7">
-	    <input class="input" type="password" name="password">
-	  </div>
-	  <div class="span7">
-	    <div>Reenter Password</div>
-	  </div>
-	  <div class="span7">
-	    <input class="input" type="password" name="password_check">
+	    {{ form.parent_choices }}
 	  </div>
 	</div>
 	<button class="btn" type="submit">Sign Up</button>
