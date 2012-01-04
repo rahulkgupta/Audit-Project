@@ -13,7 +13,8 @@
 
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}dashboard.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}signup.css" rel="stylesheet">
+
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -23,35 +24,31 @@
   </head>
 
   <body>
+    <div id="content">
     <div class="topbar">
       <div class="fill">
         <div class="container">
           <a class="brand" href="#">Audit.us</a>
-          <ul class="nav">
-            <li><a href="/dashboard">Home</a></li>
-            <li class="active" ><a>Audits</a></li>
-            <li><a href="#contact">Reports</a></li>
-	    <li><a href="#contact">Teams</a></li>
-          </ul>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="content">
-	<form action="/new_audit" method="post">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="container" id="signup">
+	<form action="/new_org" method="post">
 	   {% csrf_token %} 
 	<div class="row">
 	  <div class="span7">
-	    <div>Audit Name</div>
+	    <div>Organization Name</div>
 	  </div>
 	  <div class="span7">
-	    <input class="input" type="text" name="audit_name">
+	    <input class="input" type="text" name="org_name">
 	  </div>
 	  <div class="span7">
-	    <div>Last Name</div>
+	    <div>Organization Type</div>
 	  </div>
 	  <div class="span7">
-	    <input class="input" type="text" name="last_name">
+	    {{ form.choices }}
 	  </div>
 	  <div class="span7">
 	    <div>Email</div>
@@ -74,7 +71,13 @@
 	</div>
 	<button class="btn" type="submit">Sign Up</button>
       </form>
+    </div>
+
+    <div class="footer">
+      <div class="footer" id="content">
+	<p>© Company 2011</p>
       </div>
+    </div>
     </div>
   </body>
 </html>

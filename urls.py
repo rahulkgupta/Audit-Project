@@ -9,6 +9,13 @@ urlpatterns = patterns('main.views',
     (r'^dashboard$','dashboard'),
     (r'^audits$','audits'),
     (r'^signup$','signup'),
+    (r'^join$','join'),
+    (r'^teams$','teams'),
+)
+
+urlpatterns += patterns('main.views',
+    (r'teams/create','create_org'),
+    (r'teams/join','join_org'),
 )
 
 urlpatterns += patterns('audits.views',

@@ -18,12 +18,15 @@ class Org (models.Model):
         ('DPT', 'Department')
     )
 
+    creator = models.ForeignKey(UserProfile, related_name='creator')
     org_type = models.CharField(max_length=3, choices=ORG_TYPES)
     parent = models.ForeignKey('self')
-    members = models.ManyToManyField(UserProfile)
+    members = models.ManyToManyField(UserProfile, through='Membership')
 
-#class assocs (Models.model):
-#    user = models.ForeignKey(UserProfile)
-#    org = models.(Org)
+class Membership (models.Model):
+    user = models.ForeignKey(UserProfile)
+    org = models.ForeignKey(Org)
+    accepted = models.BooleanField()
+    
         
 # Create your models here.
