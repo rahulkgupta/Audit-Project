@@ -69,6 +69,7 @@ def create_org(request):
                 org = Org(name=name,creator=user,org_type=choice, accepted=False,parent=parent)
             org.save()
             member = Membership(user=user,org=org,accepted=True)
+            member.save()
             return HttpResponseRedirect(reverse('main.views.dashboard'))
     else:
         return render_to_response('main/new_team.html',
@@ -76,9 +77,21 @@ def create_org(request):
                               context_instance=RequestContext(request))
 
 def join_org(request):
-    return null
+    user = request.session['user']
+    if request.method == 'POST':
+        ""
+    else:
+        return render_to_response('main/join_team.html',
+                              {'form':MemberForm(user)},
+                              context_instance=RequestContext(request))
 
 class OrgForm (forms.Form):
     name = forms.CharField(max_length=100)
     choices = forms.ChoiceField(choices=Org.ORG_TYPES)
     parent_choices = forms.ModelChoiceField(queryset=Org.objects.all())
+
+class MemberForm (forms.Form):
+
+    def __init__ (self, user, *args, **kwargs):
+        super(MemberForm,self).__init__(*args, **kwargs)
+        self.fields['choices'] = forms.ModelChoiceField(queryset=Org.objects.filter(members__user=user))
