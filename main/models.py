@@ -20,8 +20,12 @@ class Org (models.Model):
 
     creator = models.ForeignKey(UserProfile, related_name='creator')
     org_type = models.CharField(max_length=3, choices=ORG_TYPES)
-    parent = models.ForeignKey('self')
+    parent = models.ForeignKey('self', blank=True, null=True)
+    accepted = models.BooleanField()
     members = models.ManyToManyField(UserProfile, through='Membership')
+    
+    def __unicode__(self):
+        return self.name
 
 class Membership (models.Model):
     user = models.ForeignKey(UserProfile)
