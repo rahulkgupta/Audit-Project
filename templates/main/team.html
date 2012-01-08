@@ -6,4 +6,6 @@
 <h2> Applicants </h2>
 {% for applicant in applicants %}
 <div> {{ applicant }} </div>
+<a href="/accept_member/{{applicant.id}}" class="btn primary">Accept</a>
+<a href="/deny_member/{{applicant.id}}" class="btn primary">Deny</a>
 {% endfor %}

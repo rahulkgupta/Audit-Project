@@ -12,6 +12,9 @@ urlpatterns = patterns('main.views',
     (r'^join$','join'),
     (r'^teams$','teams'),
     (r'^teams/(\w+)$','team'),
+    (r'^accept_member/(\d+)$','accept_member'),
+    (r'^deny_member/(\d+)$','deny_member'),
+
 )
 
 urlpatterns += patterns('main.views',

@@ -63,6 +63,7 @@ def teams(request):
 
 def team(request,org_name):
     org = Org.objects.filter(name=org_name)[0]
+    request.session['org'] = org
     org_type = org.get_org_type_display()
     org_name = org.name
     members = UserProfile.objects.filter(org=org,membership__accepted=True)
@@ -115,6 +116,22 @@ def join_org(request):
         return render_to_response('main/join_team.html',
                               {'form':MemberForm(user)},
                               context_instance=RequestContext(request))
+
+def accept_member(request,member_id):
+    #make sure to check if the caller is the creator
+    org = request.session['org']
+    member = Membership.objects.get(user__id=member_id,org=org)
+    member.accepted = True
+    member.save()
+    return HttpResponseRedirect(reverse('main.views.dashboard'))
+
+def deny_member(request,member_id):
+    #make sure to check if the caller is the creator
+    #do something to notify the requester that his/her request was denied
+    org = request.session['org']
+    member = Membership.objects.get(user__id=member_id,org=org)
+    member.delete()
+    return HttpResponseRedirect(reverse('main.views.dashboard'))
 
 class OrgForm (forms.Form):
     name = forms.CharField(max_length=100)
