@@ -6,6 +6,9 @@ class UserProfile (models.Model):
     title = models.CharField(max_length=30)
     #org = models.CharField(max_length=20)
     #suborg = models.CharField(max_length=20)
+    
+    def __unicode__(self):
+        return self.user.first_name
 
 class Org (models.Model):
     name = models.CharField(max_length=20)
@@ -31,6 +34,5 @@ class Membership (models.Model):
     user = models.ForeignKey(UserProfile)
     org = models.ForeignKey(Org)
     accepted = models.BooleanField()
-    
-        
+
 # Create your models here.

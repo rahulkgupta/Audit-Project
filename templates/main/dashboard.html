@@ -44,8 +44,13 @@
         </div>
 	<div class="teams">
 	  <h2>Teams</h2>
-	  <a href="/teams/create" class="btn primary">Create</a>
-	  <a href="/teams/join" class="btn primary">Join</a>
+	  <ul>
+	  {% for org in orgs %}
+	     <li><a href="teams/{{org}}"> {{org }} </a></li>
+	  {% endfor %}
+	  </ul>
+	  <a href="/teams_create" class="btn primary">Create</a>
+	  <a href="/teams_join" class="btn primary">Join</a>
 	</div>
         <div class="row">
           <div class="span2">

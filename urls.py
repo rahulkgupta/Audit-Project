@@ -11,11 +11,12 @@ urlpatterns = patterns('main.views',
     (r'^signup$','signup'),
     (r'^join$','join'),
     (r'^teams$','teams'),
+    (r'^teams/(\w+)$','team'),
 )
 
 urlpatterns += patterns('main.views',
-    (r'^teams/create$','create_org'),
-    (r'^teams/join$','join_org'),
+    (r'^teams_create$','create_org'),
+    (r'^teams_join$','join_org'),
 )
 
 urlpatterns += patterns('audits.views',

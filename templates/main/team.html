@@ -1,0 +1,9 @@
+<div> {{ org.name }} </div>
+<div> {{ org_type }} </div>
+{% for member in members %}
+<div> {{member}} </div>
+{% endfor %}
+<h2> Applicants </h2>
+{% for applicant in applicants %}
+<div> {{ applicant }} </div>
+{% endfor %}

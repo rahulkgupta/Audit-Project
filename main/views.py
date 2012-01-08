@@ -23,6 +23,7 @@ def join(request):
         user = User.objects.create_user(request.POST.get('email'),request.POST.get('email'),request.POST.get('password'))
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
+        user.save()
         user_profile = UserProfile (user=user)
         user_profile.save()
         if user is not None:
@@ -35,14 +36,18 @@ def signin(request):
         pw = request.POST.get('password')
         user = authenticate(username=uname, password=pw)
         print user
-        #user_profile = UserProfile.objects.filter(user=user)
+        user_profile = UserProfile.objects.get(user=user)
         if user is not None:
-            #request.session['user'] = user_profile
+            request.session['user'] = user_profile
             return HttpResponseRedirect(reverse('main.views.dashboard'))
                                   
 def dashboard(request):
+    user = request.session['user']
+    print user.user
+    orgs = Org.objects.filter(members=user,membership__accepted=True)
+    print orgs
     return render_to_response('main/dashboard.html',
-                              {},
+                              {'orgs':orgs,},
                               context_instance=RequestContext(request))
 
 def audits(request):
@@ -53,6 +58,21 @@ def audits(request):
 def teams(request):
     return render_to_response('main/teams.html',
                               {},
+                              context_instance=RequestContext(request))
+
+
+def team(request,org_name):
+    org = Org.objects.filter(name=org_name)[0]
+    org_type = org.get_org_type_display()
+    org_name = org.name
+    members = UserProfile.objects.filter(org=org,membership__accepted=True)
+    applicants = UserProfile.objects.filter(org=org,membership__accepted=False)
+    print applicants
+    return render_to_response('main/team.html',
+                              {'org':org,
+                               'org_type':org_type,
+                               'members':members,
+                               'applicants':applicants},
                               context_instance=RequestContext(request))
 
 def create_org(request):
@@ -71,6 +91,8 @@ def create_org(request):
             member = Membership(user=user,org=org,accepted=True)
             member.save()
             return HttpResponseRedirect(reverse('main.views.dashboard'))
+        else:
+            print "not valid"
     else:
         return render_to_response('main/new_team.html',
                               {'form':OrgForm()},
@@ -79,7 +101,16 @@ def create_org(request):
 def join_org(request):
     user = request.session['user']
     if request.method == 'POST':
-        ""
+        print request.POST
+        form = MemberForm(user, request.POST)
+        print "h1"
+        if form.is_valid():
+            print "hello"
+            org = form.cleaned_data['choices']
+            print org
+            member = Membership(user=user,org=org,accepted=False)
+            member.save()
+            return HttpResponseRedirect(reverse('main.views.dashboard'))
     else:
         return render_to_response('main/join_team.html',
                               {'form':MemberForm(user)},
@@ -88,10 +119,10 @@ def join_org(request):
 class OrgForm (forms.Form):
     name = forms.CharField(max_length=100)
     choices = forms.ChoiceField(choices=Org.ORG_TYPES)
-    parent_choices = forms.ModelChoiceField(queryset=Org.objects.all())
+    parent_choices = forms.ModelChoiceField(queryset=Org.objects.all(),required=False)
 
 class MemberForm (forms.Form):
 
     def __init__ (self, user, *args, **kwargs):
         super(MemberForm,self).__init__(*args, **kwargs)
-        self.fields['choices'] = forms.ModelChoiceField(queryset=Org.objects.filter(members__user=user))
+        self.fields['choices'] = forms.ModelChoiceField(queryset=Org.objects.exclude(members__user=user))
